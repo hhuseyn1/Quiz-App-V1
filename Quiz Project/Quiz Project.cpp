@@ -46,13 +46,13 @@ int main() {
 			}
 			else
 				system("cls");
-			
+
 		}
 				break;
 
 		case '2': {
 			system("cls");
-			
+
 			cout << "\t\t\t\t\t\tEnter username: ";
 			cin >> username;
 			cout << "\t\t\t\t\t\tEnter password: ";
@@ -70,29 +70,29 @@ int main() {
 
 				option = _getch();
 				switch (option) {
-				case '1':{
+				case '1': {
 					AddQuestion(questions);
 				}
-				break;
+						break;
 				case '2': {
 					DeleteQuestion(questions);
 				}
-				break;
+						break;
 				case '3': {
 					StartQuiz(username);
 				}
-				break;
+						break;
 				case '4': {
 					LeaderBoard(fileNameLeader);
 				}
-				break;
+						break;
 				case '5': {
 					system("cls");
 					Questions();
-					AdminAllAnswers();	
-					
+					AdminAllAnswers();
+
 				}
-					break;
+						break;
 				default:
 					system("cls");
 					break;
@@ -106,36 +106,36 @@ int main() {
 		}
 				break;
 		case '1': {
-		
-		
-		system("cls");
-		cout << "\t\t\t\t\t\tEnter username: ";
-		getline(cin, username);
-		cout << "\t\t\t\t\t\tEnter password: ";
-		getline(cin, password);
-		cout << "\t\t\t\t\t\tEnter phone: ";
-		getline(cin, phone);
-		cout << "\t\t\t\t\t\tEnter email: ";
-		getline(cin, email);
-		
-		cout << "\t\t\t\t\t\tLogin successfully!!!" << endl;
-		Sleep(1500);
-		system("cls");
-		cout << "\t\t\t\t\t\t[1]Start quiz" << endl;
-		cout << "\t\t\t\t\t\t[2]Scoreboard" << endl;
-		option = _getch();
-		switch (option) {
-		case '1':{
-			StartQuiz(username);
-		}
-				break;
-		case '2': {
-			LeaderBoard(fileNameLeader);
-		}
-				break;
+
+
+			system("cls");
+			cout << "\t\t\t\t\t\tEnter username: ";
+			getline(cin, username);
+			cout << "\t\t\t\t\t\tEnter password: ";
+			getline(cin, password);
+			cout << "\t\t\t\t\t\tEnter phone: ";
+			getline(cin, phone);
+			cout << "\t\t\t\t\t\tEnter email: ";
+			getline(cin, email);
+
+			cout << "\t\t\t\t\t\tLogin successfully!!!" << endl;
+			Sleep(1500);
+			system("cls");
+			cout << "\t\t\t\t\t\t[1]Start quiz" << endl;
+			cout << "\t\t\t\t\t\t[2]Scoreboard" << endl;
+			option = _getch();
+			switch (option) {
+			case '1': {
+				StartQuiz(username);
+			}
+					break;
+			case '2': {
+				LeaderBoard(fileNameLeader);
+			}
+					break;
 			default:
 				break;
-		}
+			}
 		}
 				break;
 		case '3': {
@@ -144,14 +144,27 @@ int main() {
 			cout << "\n\t\t\t\t\t\tGuest login successfully!!!" << endl;
 			Sleep(1500);
 			system("cls");
-		}
-				break;
+			cout << "\t\t\t\t\t\t[1]Start quiz" << endl;
+			cout << "\t\t\t\t\t\t[2]Scoreboard" << endl;
+			option = _getch();
+			switch (option) {
+			case '1': {
+				StartQuiz(username);
+			}
+					break;
+			case '2': {
+				LeaderBoard(fileNameLeader);
+			}
+					break;
+			}
+			break;
 		default:
 			system("cls");
 			break;
 
-    }
+		}
+		}
 	}
-	}
+
 
 
