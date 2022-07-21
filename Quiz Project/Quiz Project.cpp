@@ -13,6 +13,7 @@ int questionStaticId = 0;
 #include"User.h"
 #include"Guest.h"
 #include "functions.h"
+int questioNumber = 13;
 string username, password,phone,email;
 int main() {
 	vector<User>users;

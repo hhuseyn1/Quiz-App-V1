@@ -12,34 +12,39 @@ void DeleteQuestion(vector<Question>& allQuestions) {
 }
 
 void AddQuestion(vector<Question>& allQuestions) {
-	string question, answer_A, answer_B, answer_C, answer_D;
+	string question, answer_A, answer_B, answer_C, answer_D,correctOpt;
 	char input;
 	while (true) {
 		cin.ignore();
 		cout << "Enter the question: ";
 		getline(cin, question);
-		cout << "The correct choice: ";
+		cout << "A: ";
 		getline(cin, answer_A);
 
-		cout << "Second choice: ";
+		cout << "B: ";
 		getline(cin, answer_B);
 
-		cout << "Third choice: ";
+		cout << "C: ";
 		getline(cin, answer_C);
 
-		cout << "Fourth choice: ";
+		cout << "D: ";
 		getline(cin, answer_D);
 		cin.ignore();
-		Question newQuestion(question, answer_A, answer_B, answer_C, answer_D);
-		allQuestions.push_back(newQuestion);
 
+		cout << "Correct option is ";
+		cin >> correctOpt;
 		ofstream questionFile;
-		questionFile.open("questions.txt", fstream::app);
+		ofstream answerFile;
+		answerFile.open("answers.txt");
+		questionFile.open("questions.txt");
+		questionFile << questioNumber++ << endl;
 		questionFile << question << endl;
-		questionFile << answer_A << endl;
+		questionFile << answer_A << '\t';
 		questionFile << answer_B << endl;
-		questionFile << answer_C << endl;
-		questionFile << answer_D;
+		questionFile << answer_C << '\t';
+		questionFile << answer_D << endl;
+		answerFile << correctOpt << endl;
+		answerFile.close();
 		questionFile.close();
 		cout << "\t\t\t\t\tQuestion successfully added!!!" << endl;
 		cout << "\t\t\t\t\tWould you want go to main menu? : ";
