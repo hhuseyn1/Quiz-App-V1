@@ -3,6 +3,7 @@
 #include <conio.h>
 #include "json.hpp"
 #include <fstream>
+#include <string>
 #include <Windows.h>
 using namespace std;
 using json = nlohmann::json;
@@ -139,10 +140,7 @@ int main() {
 				break;
 		case '3': {
 			system("cls");
-			cout << "\t\t\t\t\t\tEnter username: ";
-			cin >> username;
-			cout << "\t\t\t\t\t\tEnter password: ";
-			cin >> password;
+			username = "Guest";
 			cout << "\n\t\t\t\t\t\tGuest login successfully!!!" << endl;
 			Sleep(1500);
 			system("cls");

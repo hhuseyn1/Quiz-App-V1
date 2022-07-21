@@ -125,12 +125,10 @@ void Questions() {
 	
 	
 
-	/*ofstream leaderBoard;
-	leaderBoard.open("scoreboard.txt", fstream::app);
-	leaderBoard << username <<' '<<score << endl;*/
+	
 }
 void AdminAllAnswers() {
-	int score=0;
+	
 	ifstream myfile;
 	ifstream myfileA;
 	myfile.open("questions.txt");
@@ -157,13 +155,19 @@ void AdminAllAnswers() {
 }
 
 void StartQuiz(string& username) {
+	int score = 0;
 	cout << "\t\t\t\t\t\tWelcome " << username << " !!!!"<<endl;
 	Sleep(1500);
 	system("cls");
 	ifstream file;
+	ofstream fileMyA;
+	ifstream fileA;
 	string myline;
 	string answer;
+	string Fanswer;
 	int pos = 0;
+	fileMyA.open("myAnswers.txt");
+	fileA.open("answers.txt");
 	file.open("questions.txt");
 	if (!file)
 		throw "File can not found !!!";
@@ -173,16 +177,34 @@ void StartQuiz(string& username) {
 		getline(file, myline);
 		cout << myline << '\n';
 		if (pos == 3) {
+		getline(fileA, Fanswer);
+			reanswer:
 			cin >> answer;
-			pos = 0;
+			if (answer == "a" || answer == "b" || answer == "c" || answer == "d" || answer == "s") {
+				fileMyA << answer << endl;
+				pos = 0;
+				if (answer==Fanswer)
+					score += 5;
+			}
+			else {
+				cout << "You can choose only abcds !!!" << endl;
+				goto reanswer;
+			}
 		}
 		else
 			pos++;
-
-
-
 	}
+	
+	
 
 
+
+	if (username != "Guest") {
+		ofstream leaderBoard;
+		leaderBoard.open("scoreboard.txt", fstream::app);
+		leaderBoard << username << ' ' << score << endl;
+	}
+	else
+		cout << username << ' ' << score << " point" << endl;
 }
 
