@@ -131,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
-    <ClInclude Include="Database.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Quiz.h" />

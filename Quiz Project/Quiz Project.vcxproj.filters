@@ -23,9 +23,6 @@
     <ClInclude Include="Quiz.h">
       <Filter>Kaynak Dosyalar</Filter>
     </ClInclude>
-    <ClInclude Include="Database.h">
-      <Filter>Kaynak Dosyalar</Filter>
-    </ClInclude>
     <ClInclude Include="Admin.h">
       <Filter>Kaynak Dosyalar</Filter>
     </ClInclude>

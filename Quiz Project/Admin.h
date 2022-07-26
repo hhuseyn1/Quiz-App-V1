@@ -1,17 +1,24 @@
 #pragma once
-class Admin {
-	string fullName;
+class Admin :public User {
+	string username;
 	string password;
-	string email;
 public:
 	Admin() = default;
-	Admin(string fullName, string password, string email) {
-		this->fullName = fullName;
+	Admin(string name, string surname, string email, string username, string password) :User(name, surname, email) {
+		this->username = username;
 		this->password = password;
-		this->email = email;
 	}
 
-	string getfullName() { return fullName; }
-	string getPassword() { return password; }
-	string getEmail() { return email; }
+	string getUsername()const { return username; }
+	string getPassword()const { return password; }
+
+	friend ostream& operator<<(ostream& output, const Admin& admin);
 };
+ostream& operator<<(ostream& output, const Admin& admin) {
+	cout << "Name: " << admin.getName() << endl;
+	cout << "Surname: " << admin.getSurname() << endl;
+	cout << "Email: " << admin.getEmail() << endl;
+	cout << "Username: " << admin.username << endl;
+	cout << "Password: " << admin.password << endl;
+	return output;
+}

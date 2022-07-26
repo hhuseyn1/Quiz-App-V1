@@ -1,17 +1,6 @@
 #pragma once
-void DeleteQuestion(vector<Question>& allQuestions) {
-	int id;
-	cout << "Enter the question number: ";
-	cin >> id;
-	for (size_t i = 0; i < allQuestions.size(); i++) {
-		if (allQuestions[i].getNumber() == id){
-			allQuestions.erase(allQuestions.begin() + i);
-		}
-	}
-	cout << endl << "Question " << id << " has been deleted" << endl;
-}
 
-void AddQuestion(vector<Question>& allQuestions) {
+void addQuestion() {
 	string question, answer_A, answer_B, answer_C, answer_D,correctOpt;
 	char input;
 	while (true) {
@@ -37,12 +26,21 @@ void AddQuestion(vector<Question>& allQuestions) {
 		ofstream answerFile;
 		answerFile.open("answers.txt");
 		questionFile.open("questions.txt");
-		questionFile << questioNumber++ << endl;
+
+		if (!answerFile)
+			throw exception("Answer file can not found !!!");
+		if (!questionFile)
+			throw exception("Question file can not found !!!");
+		if (!answerFile.is_open())
+			throw exception("Answer file can not opened !!!");
+		if (!questionFile.is_open())
+			throw exception("Question file can not opened !!!");
+		questionFile << ++questioNumber << endl;
 		questionFile << question << endl;
-		questionFile << answer_A << '\t';
-		questionFile << answer_B << endl;
-		questionFile << answer_C << '\t';
-		questionFile << answer_D << endl;
+		questionFile <<"A:" << answer_A << '\t';
+		questionFile <<"B:" <<answer_B << endl;
+		questionFile <<"C:" <<answer_C << '\t';
+		questionFile <<"D:" <<answer_D << endl;
 		answerFile << correctOpt << endl;
 		answerFile.close();
 		questionFile.close();
@@ -55,11 +53,12 @@ void AddQuestion(vector<Question>& allQuestions) {
 		}
 	}
 }
-void LeaderBoard(string fileName) {
+
+void LeaderBoard() {
 	string line;
 	ifstream leaderBoard("scoreboard.txt");
 	if (!leaderBoard.is_open())
-		throw "Leader board can not open !!!";
+		throw exception("Leader board can not open !!!");
 	else{
 		while (getline(leaderBoard, line)) {
 			cout <<line<<'\n';
@@ -72,8 +71,8 @@ void LeaderBoard(string fileName) {
 void Questions() {
 	ofstream file;
 	ofstream fileA;
-	file.open("questions.txt");
-	fileA.open("answers.txt");
+	file.open("questions.txt",fstream::app);
+	fileA.open("answers.txt", fstream::app);
 	file << "1\n When computer was first invented?\n";
 	file << " a.1820 \t b.1823\n";
 	file << " c.1834 \t d.1922\n";
@@ -127,39 +126,11 @@ void Questions() {
 	file << " c. Intel \t d. AMD\n";
 	fileA << 'c' << endl;
 	file.close();
-	
-	
-
-	
-}
-void AdminAllAnswers() {
-	
-	ifstream myfile;
-	ifstream myfileA;
-	myfile.open("questions.txt");
-	myfileA.open("answers.txt");
-	string myline;
-	string mylineA;
-	while (myfile) {
-		if (myfile.is_open()) {
-			getline(myfile, myline);
-			cout << myline << '\n';
-		}
-		else
-			throw "file can not open !!!";
-	}
-	while (myfileA) {
-		if (myfileA.is_open()) {
-				getline(myfileA, mylineA);
-				cout << mylineA << '\n';
-			}
-	else
-		throw "file can not open !!!";
-		}
 
 }
 
-void StartQuiz(string& username) {
+
+void StartQuiz(bool& isGuest) {
 	int score = 0;
 	cout << "\t\t\t\t\t\tWelcome " << username << " !!!!"<<endl;
 	Sleep(1500);
@@ -175,9 +146,9 @@ void StartQuiz(string& username) {
 	fileA.open("answers.txt");
 	file.open("questions.txt");
 	if (!file)
-		throw "File can not found !!!";
+		throw exception("File can not found !!!");
 	if (!file.is_open())
-		throw "File can not opened !!!";
+		throw exception("File can not opened !!!");
 	while (file) {
 		getline(file, myline);
 		cout << myline << '\n';
@@ -199,12 +170,8 @@ void StartQuiz(string& username) {
 		else
 			pos++;
 	}
-	
-	
 
-
-
-	if (username != "Guest") {
+	if (isGuest==1) {
 		ofstream leaderBoard;
 		leaderBoard.open("scoreboard.txt", fstream::app);
 		leaderBoard << username << ' ' << score << endl;

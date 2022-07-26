@@ -12,4 +12,10 @@ public:
 	string getSurname() { return _surname; }
 
 
+friend ostream& operator<<(ostream output, const Guest& guest);
 };
+ostream& operator<<(ostream output, const Guest& guest) {
+	cout << "Name: " << guest._name << endl;
+	cout << "Surname: " << guest._surname << endl;
+	return output;
+}

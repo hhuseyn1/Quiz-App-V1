@@ -1,25 +1,23 @@
 ﻿#include <iostream>
 #include <vector>
 #include <conio.h>
-#include "json.hpp"
 #include <fstream>
 #include <string>
 #include <Windows.h>
 using namespace std;
-using json = nlohmann::json;
 int questionStaticId = 0;
+int questioNumber = 14;
+bool isGuest=false;
+string username;
 #include"Quiz.h"
-#include"Admin.h"
 #include"User.h"
+#include"Admin.h"
 #include"Guest.h"
 #include "functions.h"
-int questioNumber = 13;
-string username, password,phone,email;
+
 int main() {
-	vector<User>users;
-	vector<Question>questions;
-	string fileName = "questions.txt";
-	string fileNameLeader = "scoreboard.txt";
+	Admin a1{ "huseyn","hemidov","huseyn@gmail.com","huseyn123","huseyn112233" };
+	string name, surname, password,phone,email;
 	char option;
 	while (true) {
 		cout << "\t\t\t\t\t\t ______________________" << endl;
@@ -58,42 +56,48 @@ int main() {
 			cin >> username;
 			cout << "\t\t\t\t\t\tEnter password: ";
 			cin >> password;
-			if (username == "admin" && password == "admin") {
+			if (username == a1.getUsername() && password == a1.getPassword()) {
 				cout << "\n\t\t\t\t\t\tAdmin login successfully!!!" << endl;
 				Sleep(1500);
 				system("cls");
 
 				cout << "\t\t\t\t\t\t[1]Add question" << endl;
-				cout << "\t\t\t\t\t\t[2]Delete question" << endl;
-				cout << "\t\t\t\t\t\t[3]Play game" << endl;
-				cout << "\t\t\t\t\t\t[4]Scoreboard" << endl;
-				cout << "\t\t\t\t\t\t[5]Show all questions and answers" << endl;
+				cout << "\t\t\t\t\t\t[2]Play game" << endl;
+				cout << "\t\t\t\t\t\t[3]Scoreboard" << endl;
 
 				option = _getch();
 				switch (option) {
 				case '1': {
-					AddQuestion(questions);
+					try {
+						addQuestion();
+					}
+					catch (char* ex) {
+						cout << "Error -> " << ex << endl;
+					}
 				}
 						break;
-				case '2': {
-					DeleteQuestion(questions);
-				}
-						break;
+
 				case '3': {
-					StartQuiz(username);
+					Questions();
+					try {
+						StartQuiz(isGuest);
+					}
+					catch (char* ex) {
+						cout << "Error -> " << ex << endl;
+					}
 				}
 						break;
 				case '4': {
-					LeaderBoard(fileNameLeader);
+					try {
+						LeaderBoard();
+					}
+					catch (char* ex) {
+						cout << "Error -> " << ex << endl;
+					}
+					
 				}
 						break;
-				case '5': {
-					system("cls");
-					Questions();
-					AdminAllAnswers();
 
-				}
-						break;
 				default:
 					system("cls");
 					break;
@@ -102,12 +106,13 @@ int main() {
 
 
 			}
-			else
+			else {
 				system("cls");
+				throw exception("Invalid username or password !!!");
+			}
 		}
 				break;
 		case '1': {
-
 
 			system("cls");
 			cout << "\t\t\t\t\t\tEnter username: ";
@@ -127,11 +132,23 @@ int main() {
 			option = _getch();
 			switch (option) {
 			case '1': {
-				StartQuiz(username);
+				Questions();
+				try {
+					StartQuiz(isGuest);
+				}
+				catch (char* ex) {
+					cout << "Error -> " << ex << endl;
+				}
 			}
 					break;
 			case '2': {
-				LeaderBoard(fileNameLeader);
+				
+				try {
+					LeaderBoard();
+				}
+				catch (char* ex) {
+					cout << "Error -> " << ex << endl;
+				}
 			}
 					break;
 			default:
@@ -141,7 +158,11 @@ int main() {
 				break;
 		case '3': {
 			system("cls");
-			username = "Guest";
+			cout << "\t\t\t\t\t\tEnter name: ";
+			getline(cin, name);
+			cout << "\t\t\t\t\t\tEnter surname: ";
+			getline(cin, surname);
+			isGuest = true;
 			cout << "\n\t\t\t\t\t\tGuest login successfully!!!" << endl;
 			Sleep(1500);
 			system("cls");
@@ -150,11 +171,23 @@ int main() {
 			option = _getch();
 			switch (option) {
 			case '1': {
-				StartQuiz(username);
+				Questions();
+				try {
+					StartQuiz(isGuest);
+				}
+				catch (char* ex) {
+					cout << "Error -> " << ex << endl;
+				}
 			}
 					break;
 			case '2': {
-				LeaderBoard(fileNameLeader);
+				try {
+					LeaderBoard();
+				}
+				catch (char* ex) {
+					cout << "Error -> " << ex << endl;
+				}
+
 			}
 					break;
 			}
@@ -166,6 +199,6 @@ int main() {
 		}
 		}
 	}
-
+}
 
 
